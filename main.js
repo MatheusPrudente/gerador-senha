@@ -18,7 +18,8 @@ function shuffle(array) {
 }
 
 function getPassword() {
-  let m = 5;
+  shuffle(array);
+  let m = 8;
   let password = "";
   while (m) {
     password += array[getRandom(array.length)];
