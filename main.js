@@ -2,6 +2,10 @@ const array = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","
                "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","X","Y","Z",
                "1","2","3","4","5","6","7","8","9","0","!","@","#","$","%","&","*","(",")","_","-",".",",",";",":","[","]","}","{"];
 
+window.addEventListener("load", function(event) {
+  getPassword();
+});
+
 function shuffle(array) {
   let m = array.length;
   let t;
@@ -19,15 +23,32 @@ function shuffle(array) {
 
 function getPassword() {
   shuffle(array);
-  let m = 8;
+  let length =  document.querySelector("#passwordLength").value;
   let password = "";
-  while (m) {
+  document.querySelector("#passwordLabel").innerHTML = "Password length : " + length;
+
+  while (length) {
     password += array[getRandom(array.length)];
-    m--;
+    length--;
   }
-  console.log(password);
+
+  document.getElementById("password").innerHTML = password;
 }
 
 function getRandom(max) {
   return Math.floor(Math.random() * max);
+}
+
+
+function copyPassword() {
+  let copyText = document.getElementById("password");
+
+  navigator.clipboard.writeText(copyText.textContent);
+  let tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copied: " + copyText.textContent;
+}
+
+function showTooltip() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
 }
